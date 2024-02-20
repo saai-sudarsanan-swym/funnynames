@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: funnynames-deployment
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: funnynames
+  template:
+    metadata:
+      labels:
+        app: funnynames
+    spec:
+      containers:
+      - name: funnynames
+        image: <your-image>  # Replace with the actual image name and version
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: funnynames-service
+spec:
+  selector:
+    app: funnynames
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: NodePort  # Use NodePort to expose the service on a static port on each node
+
