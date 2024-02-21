@@ -35,15 +35,37 @@ docker build -t funnynames:1.0.0 .
 
 ## Deploy your replicaset using deployment.yaml
 ```
+kubectl create ns funny
 kubectl apply -f deployment.yaml
 ```
 
 ## Expose your service
 ```
-kubectl port-forward svc/funnynames-service 5000:80
+kubectl get po -n funny
+kubectl port-forward svc/funnynames-service 5000:80 -n funny
 ```
 
 ## Connect to your service
 ```
 curl 127.0.0.1:5000/getname
+```
+
+--- 
+
+# Helm Demo
+
+
+## Delete old deployment
+```
+kubectl delete -f deployment.yaml 
+```
+
+## Install Helm
+```
+brew install helm
+```
+
+## Install the Application using the helm chart
+```
+helm install funnynames funnynames-chart -n funny -f funnynames-chart/values.yml
 ```

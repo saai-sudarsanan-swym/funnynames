@@ -1,0 +1,27 @@
+appName: funnynames
+appNameSpace: funny
+
+deployment:
+  imageName: funnynames
+  imageVersion: 1.0.0
+  containerPort: 5000
+  replicaCount: 3
+
+env:
+  MYNAME:
+    name: MYNAME
+    value: saai
+
+service:
+  ports:
+    serviceProtocol: TCP
+    servicePort: 80
+    targetPort: 5000
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: funnynames-deployment
+  namespace: funny
 spec:
   replicas: 3  # Adjust the number of replicas as needed
   selector:
@@ -24,11 +25,15 @@ spec:
           requests:
             cpu: 200m
             memory: 256Mi
+        env:
+          - name: MYNAME
+            value: saai
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: funnynames-service
+  namespace: funny
 spec:
   selector:
     app: funnynames
