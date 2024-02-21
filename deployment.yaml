@@ -14,9 +14,16 @@ spec:
     spec:
       containers:
       - name: funnynames
-        image: <your-image>  # Replace with the actual image name and version
+        image: funnynames:1.0.0
         ports:
         - containerPort: 5000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +36,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 5000
-  type: NodePort  # Use NodePort to expose the service on a static port on each node
-

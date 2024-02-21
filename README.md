@@ -37,3 +37,13 @@ docker build -t funnynames:1.0.0 .
 ```
 kubectl apply -f deployment.yaml
 ```
+
+## Expose your service
+```
+kubectl port-forward svc/funnynames-service 5000:80
+```
+
+## Connect to your service
+```
+curl 127.0.0.1:5000/getname
+```
